@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flip_box_bar/flip_box_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'mainDrawer.dart';
@@ -27,7 +28,7 @@ class splash extends StatelessWidget{
 }
 
 class MyApp extends StatelessWidget {
-  int currentIndex1=1;
+  int currentIndex1=0;
 
   @override
   Widget build(BuildContext context) {
@@ -192,9 +193,12 @@ class MyApp extends StatelessWidget {
           ),
         );
 
+    int selectedIndex;
     return MaterialApp(
       title: 'Circle Network',
       home: Scaffold(
+
+
 
         appBar: AppBar(
           title: Text('Circle Network'),
@@ -212,23 +216,24 @@ class MyApp extends StatelessWidget {
             gridSection,
           ],
         ),
-          bottomNavigationBar : BottomNavigationBar(
+        bottomNavigationBar: FlipBoxBar(
 
-            backgroundColor: Colors.lime,
-            currentIndex: currentIndex1,
+          selectedIndex: currentIndex1,
+          items: [
+            FlipBarItem(icon: Icon(Icons.map,), text: Text("Map"), frontColor: Colors.blue, backColor: Colors.blueAccent),
+            FlipBarItem(icon: Icon(Icons.add), text: Text("Add"), frontColor: Colors.cyan, backColor: Colors.cyanAccent),
+            FlipBarItem(icon: Icon(Icons.chrome_reader_mode), text: Text("Read"), frontColor: Colors.orange, backColor: Colors.orangeAccent),
+            FlipBarItem(icon: Icon(Icons.print), text: Text("Print"), frontColor: Colors.purple, backColor: Colors.purpleAccent),
+            FlipBarItem(icon: Icon(Icons.print), text: Text("Print"), frontColor: Colors.pink, backColor: Colors.pinkAccent),
+          ],
+          onIndexChanged: (newIndex) {
+            setState() {
+              selectedIndex = newIndex;
+            }
+          },
+        ),
 
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home),title: Text('Home'),backgroundColor: Colors.lightGreen),
-              BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('Contact'),backgroundColor: Colors.lightGreen),
-              BottomNavigationBarItem(icon: Icon(Icons.camera),title: Text('Packages'),backgroundColor: Colors.lightGreen),
-              BottomNavigationBarItem(icon: Icon(Icons.payment),title: Text('Payment'),backgroundColor: Colors.lightGreen),
 
-            ],
-            onTap: (index){
-
-              currentIndex1=index;
-            },
-          ),
       ),
 
     );
