@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+import 'livetv.dart';
+
 class mainDrawer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,12 @@ class mainDrawer extends StatelessWidget{
           ListTile(
             leading: Icon(Icons.home),
             title: Text("Home"),
-            onTap: null,
+            onTap: (){
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+            },
           ),
           ListTile(
             leading: Icon(Icons.person),

@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flip_box_bar/flip_box_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'bkashPayment.dart';
 import 'help.dart';
 import 'mainDrawer.dart';
@@ -13,6 +14,9 @@ import 'package.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
+
   runApp(splash());
 }
 
@@ -62,20 +66,26 @@ class _MybottomnavigationBarState extends State<MybottomnavigationBar> {
 
   }
 
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabBar,
-          items: [
-            BottomNavigationBarItem(icon: new Icon(Icons.home), title: Text('Home'), backgroundColor: Colors.amberAccent,),
-            BottomNavigationBarItem(icon: new Icon(Icons.contacts), title: Text('Contacts'),backgroundColor: Colors.blueAccent),
-            BottomNavigationBarItem(icon: Icon(Icons.camera),title: Text('Package')),
-            BottomNavigationBarItem(icon: Icon(Icons.payment),title: Text('Payment')),
+        bottomNavigationBar: SizedBox(
 
-          ],
+          child: BottomNavigationBar(
+            onTap: onTabBar,
+            selectedItemColor: Colors.purple,
+            currentIndex: _currentIndex,
+            items: [
+              BottomNavigationBarItem(icon: new Icon(Icons.home), title: Text('Home'), backgroundColor: Colors.orangeAccent,),
+              BottomNavigationBarItem(icon: new Icon(Icons.contacts), title: Text('Contacts'),backgroundColor: Colors.blueAccent),
+              BottomNavigationBarItem(icon: Icon(Icons.camera),title: Text('Package'),backgroundColor: Colors.lightGreen),
+              BottomNavigationBarItem(icon: Icon(Icons.payment),title: Text('Payment'),backgroundColor: Colors.deepPurpleAccent),
+
+            ],
+          ),
         ),
       ),
 

@@ -1,33 +1,48 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'mainDrawer.dart';
+import 'livetv.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color = Theme
         .of(context)
-        .primaryColor;
+        .popupMenuTheme.color;
+
+    final appBar=AppBar(
+      title: Text('Circle Network'),
+      backgroundColor: Colors.orangeAccent,
+    );
 
     Widget gridSection = Container(
       child: GridView.count(
+        
         shrinkWrap: true,
         primary: false,
         crossAxisCount: 3,
         children: <Widget>[
           new Container(
             child: new Card(
+              elevation: 0,
+              color: Colors.transparent,
+
               child: new InkResponse(
                 child: new Column(
-
                   children: <Widget>[
                     new Image.asset(
-                      'assets/images/livetv.png', height: 100, width: 100,),
+                      'assets/images/livetv.png', height:100, width: 100,),
                     new SizedBox(height: 5,),
                     new Text('Live Tv', style: TextStyle(fontSize: 18),)
                   ],
                 ),
                 onTap: () {
-                  debugPrint('work');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LiveTv()),
+                  );
                 },
               ),
             ),
@@ -175,21 +190,28 @@ class Home extends StatelessWidget {
         ],
       ),
     );
+
+
     return MaterialApp(
       title: 'Circle Network',
-      home: Scaffold(
 
-        appBar: AppBar(
-          title: Text('Circle Network'),
-        ),
+      home: Scaffold(
+        backgroundColor: Color(0xffFCDFFF),
+
+        appBar: appBar,
         drawer: mainDrawer(),
         body: ListView(
+          
           children: [
-            Image.asset(
-              'assets/images/cn4.png',
-              width: 600,
-              height: 160,
-              fit: BoxFit.cover,
+            
+            Container(
+              width: 20,
+              height: MediaQuery.of(context).size.height*.3,
+              child: Image.asset(
+                'assets/images/cn4.png',
+
+                fit: BoxFit.cover,
+              ),
             ),
             // textSection,
             gridSection,
